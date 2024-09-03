@@ -1,5 +1,10 @@
 .PHONY: build up migrate down setup copy-env
 
+# Setup the project
+setup: copy-env up build composer migrate 
+	echo "Setup complete. Access your application at:"
+	echo "Backend: http://localhost:8080"
+
 # Build Docker images
 build:
 	docker-compose build
@@ -8,6 +13,11 @@ build:
 up: build copy-env
 	docker-compose up -d
 
+composer:
+	composer install
+	docker-compose exec expense_tracker php bin/console cache:clear
+
+
 # Run database migrations
 migrate:
 	docker-compose exec expense_tracker php bin/console doctrine:migrations:migrate --no-interaction
@@ -15,11 +25,6 @@ migrate:
 # Stop and remove Docker containers
 down:
 	docker-compose down
-
-# Setup the project
-setup: up migrate
-	echo "Setup complete. Access your application at:"
-	echo "Backend: http://localhost:8000"
 
 # Copy .env.example to .env
 copy-env:

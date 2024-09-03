@@ -11,7 +11,7 @@ Expense Tracker is an API for managing expenses. It allows users to create, upda
 
 1.  **Build and Start the Docker Containers**
     Use the `make setup` command to build Docker images, start the containers, and apply any necessary database migrations:
-2. After running Api endpoints available on http://localhost:8000 or http://localhost:8080
+2. After running Api endpoints available on http://localhost:8080
 
 
 ### Prerequisites
@@ -24,8 +24,11 @@ Expense Tracker is an API for managing expenses. It allows users to create, upda
 - [Composer](https://getcomposer.org/) - For managing PHP dependencies.
 - [MySQL](https://www.mysql.com/) - (v8.0) For database management.
 
+- Make file not handle instalation you have to do the following things manually
+- Create a new file .env and copy .env.example content to .env
 - composer install
 - php bin/console doctrine:migrations:migrate --no-interaction
+- php bin/console cache:clear
 - php -S 127.0.0.1:8000 -t public   or setup virtual host and run
 
 
