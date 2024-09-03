@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: symfony_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/expense_tracker
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - expense_tracker
+    networks:
+      - symfony_expense_tracker
+
+  expense_tracker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: symfony_expense_tracker
+    restart: unless-stopped
+    working_dir: /var/www/expense_tracker
+    volumes:
+      - .:/var/www/expense_tracker
+    ports:
+       - "8000:8000"  # Symfony usually runs on port 8000
+    networks:
+      - symfony_expense_tracker
+
+  database:
+    image: mysql:8.0
+    container_name: expense_tracker_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: expense_tracker_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - symfony_expense_tracker
+
+networks:
+  symfony_expense_tracker:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
