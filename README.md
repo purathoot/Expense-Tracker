@@ -2,7 +2,7 @@
 
 ## Overview
 
-Expense Tracker is a web application for managing and monitoring personal finances. It allows users to log expenses, categorize them, and view detailed reports to gain insights into their spending habits.
+Expense Tracker is an API for managing expenses. It allows users to create, update, retrieve, and delete expense records, providing functionality to monitor and manage personal finances programmatically.
 
 ## Table of Contents
 
