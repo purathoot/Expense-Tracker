@@ -11,7 +11,7 @@ Expense Tracker is a web application for managing and monitoring personal financ
 
 1.  **Build and Start the Docker Containers**
     Use the `make setup` command to build Docker images, start the containers, and apply any necessary database migrations:
-2. After running Api endpoints available on http://localhost:8000 or htpp://localhost:8080
+2. After running Api endpoints available on http://localhost:8000 or http://localhost:8080
 
 
 ### Prerequisites
@@ -26,10 +26,10 @@ Expense Tracker is a web application for managing and monitoring personal financ
 
 - composer install
 - php bin/console doctrine:migrations:migrate --no-interaction
-- php -S 127.0.0.1:8000 -t public
+- php -S 127.0.0.1:8000 -t public   or setup virtual host and run
 
 
-### Setting Up the Backend
+### Setting Up 
 
 1. **Clone the Repository**
 
